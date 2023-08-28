@@ -1,8 +1,10 @@
 package com.takehometask.BetMachine.controller;
 
+import com.takehometask.BetMachine.command.DetermineWinCommand;
 import com.takehometask.BetMachine.model.BetRequestModel;
 import com.takehometask.BetMachine.model.BetResponseModel;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.messaging.converter.MessageConversionException;
 import org.springframework.messaging.handler.annotation.MessageExceptionHandler;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -18,19 +20,16 @@ import java.math.BigDecimal;
 
 
 @ControllerAdvice
-@Controller
-public class BetMachineController {
+@Controller("BetMachineWebSocketController")
+@RequiredArgsConstructor
+@Validated
+public class BetMachineWebSocketController {
+
+    private final DetermineWinCommand determineWinCommand;
+
     @MessageMapping("/chat")
     @SendTo("/topic/messages")
-    @MessageExceptionHandler(MessageConversionException.class)
     public @ResponseBody BetResponseModel send(@Payload @Valid BetRequestModel message) throws Exception {
-        BigDecimal test = message.bet().multiply(BigDecimal.valueOf(99 / ( 100 - message.number())));
-        System.out.println(test);
-        int serverNumber = (int) (Math.random() * 100);
-        if(serverNumber < message.number()) {
-            return new BetResponseModel(test);
-        } else {
-            return new BetResponseModel(BigDecimal.ZERO);
-        }
+        return new BetResponseModel(determineWinCommand.execute(message.bet(), message.number()));
     }
 }
