@@ -32,22 +32,15 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-websocket")
 	implementation("org.hibernate.validator:hibernate-validator")
 	testImplementation("junit:junit:4.13.1")
+	testImplementation("org.projectlombok:lombok:1.18.28")
 	compileOnly("org.projectlombok:lombok")
 	annotationProcessor("org.projectlombok:lombok")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
-	// https://mvnrepository.com/artifact/org.testng/testng
-	testImplementation("org.testng:testng:7.8.0")
 
 
 }
-tasks.withType<Test>().configureEach {
-	useJUnitPlatform {
-		excludeTags("optional")
-	}
-	useTestNG {
-		val options = this as TestNGOptions
-		options.includeGroups("optional")
-	}
+tasks.withType<Test> {
+	useJUnitPlatform()
 
 	jvmArgs = listOf(
 		"--add-opens", "java.base/java.util.concurrent=ALL-UNNAMED",
