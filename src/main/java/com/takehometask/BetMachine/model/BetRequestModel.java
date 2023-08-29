@@ -3,6 +3,8 @@ package com.takehometask.BetMachine.model;
 
 import org.springframework.validation.annotation.Validated;
 
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -15,6 +17,7 @@ public record BetRequestModel(
         @Max(value = 100, message = "Number must be less than 101")
         int number,
         @NotNull
+        @DecimalMin(value = "0.0", inclusive = false)
         BigDecimal bet
 ) {
 }

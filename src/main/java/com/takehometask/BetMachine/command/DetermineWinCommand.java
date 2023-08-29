@@ -2,21 +2,15 @@ package com.takehometask.BetMachine.command;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
-import java.util.concurrent.ThreadLocalRandom;
-import java.util.random.RandomGenerator;
 
 @Component
 @RequiredArgsConstructor
 public class DetermineWinCommand {
 
-    private final RandomGenerator randomGenerator;
-
-    public BigDecimal execute(BigDecimal bet, int number) {
-        int serverNumber = randomGenerator.nextInt(1,100+1);;
+    public BigDecimal execute(BigDecimal bet, int number, int serverNumber) {
 
         if (serverNumber > number) {
             return BigDecimal.ZERO;
@@ -31,5 +25,4 @@ public class DetermineWinCommand {
 
         return bet.multiply(intermediaryStep, mc);
     }
-
 }

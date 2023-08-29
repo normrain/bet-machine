@@ -31,21 +31,28 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.springframework.boot:spring-boot-starter-websocket")
 	implementation("org.hibernate.validator:hibernate-validator")
+	testImplementation("junit:junit:4.13.1")
 	compileOnly("org.projectlombok:lombok")
 	annotationProcessor("org.projectlombok:lombok")
-	testImplementation("org.springframework.boot:spring-boot-starter-test") {
-		exclude(module = "junit-vintage-engine")
-		exclude(module = "junit")
-		exclude(module = "mockito-core")
-	}
-	// https://mvnrepository.com/artifact/org.powermock/powermock-mockito-release-full
-	testImplementation("org.powermock:powermock-mockito-release-full:1.5.4")
+	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	// https://mvnrepository.com/artifact/org.testng/testng
+	testImplementation("org.testng:testng:7.8.0")
+
 
 }
-tasks.withType<Test> {
-	useJUnitPlatform()
+tasks.withType<Test>().configureEach {
+	useJUnitPlatform {
+		excludeTags("optional")
+	}
+	useTestNG {
+		val options = this as TestNGOptions
+		options.includeGroups("optional")
+	}
+
 	jvmArgs = listOf(
 		"--add-opens", "java.base/java.util.concurrent=ALL-UNNAMED",
-		"--add-opens", "java.base/java.lang=ALL-UNNAMED"
+		"--add-opens", "java.base/java.lang=ALL-UNNAMED",
+		"--add-opens", "java.base/java.security=ALL-UNNAMED",
+		"-Xmx2g"
 	)
 }

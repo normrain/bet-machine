@@ -1,6 +1,7 @@
 package com.takehometask.BetMachine.controller;
 
 import com.takehometask.BetMachine.command.DetermineWinCommand;
+import com.takehometask.BetMachine.command.GenerateServerNumberCommand;
 import com.takehometask.BetMachine.model.BetRequestModel;
 import com.takehometask.BetMachine.model.BetResponseModel;
 
@@ -26,10 +27,13 @@ import java.math.BigDecimal;
 public class BetMachineWebSocketController {
 
     private final DetermineWinCommand determineWinCommand;
+    private final GenerateServerNumberCommand generateServerNumberCommand;
 
     @MessageMapping("/chat")
     @SendTo("/topic/messages")
     public @ResponseBody BetResponseModel send(@Payload @Valid BetRequestModel message) throws Exception {
-        return new BetResponseModel(determineWinCommand.execute(message.bet(), message.number()));
+        int serverNumber = generateServerNumberCommand.execute();
+
+        return new BetResponseModel(determineWinCommand.execute(message.bet(), message.number(), serverNumber));
     }
 }
