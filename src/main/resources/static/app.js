@@ -8,6 +8,9 @@ stompClient.onConnect = (frame) => {
     stompClient.subscribe('/topic/bets', (result) => {
         showResults(JSON.parse(result.body).win);
     });
+    stompClient.subscribe('/topic/error', (result) => {
+        showResults(new TextDecoder().decode(result.binaryBody));
+    });
 };
 
 stompClient.onWebSocketError = (error) => {
@@ -56,5 +59,5 @@ $(function () {
     $("form").on('submit', (e) => e.preventDefault());
     $( "#connect" ).click(() => connect());
     $( "#disconnect" ).click(() => disconnect());
-    $( "#send" ).click(() => sendName());
+    $( "#send" ).click(() => sendBet());
 });

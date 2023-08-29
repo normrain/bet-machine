@@ -4,7 +4,6 @@ package com.takehometask.BetMachine.model;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.Digits;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;

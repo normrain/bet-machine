@@ -5,14 +5,9 @@ import com.takehometask.BetMachine.command.GenerateServerNumberCommand;
 import com.takehometask.BetMachine.controller.BetMachineRestController;
 import com.takehometask.BetMachine.model.BetRequestModel;
 import org.junit.jupiter.api.*;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.springframework.boot.test.mock.mockito.MockBean;
-
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 

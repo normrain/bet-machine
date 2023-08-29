@@ -1,6 +1,5 @@
 package com.takehometask.BetMachine.integration;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.takehometask.BetMachine.command.GenerateServerNumberCommand;
 import com.takehometask.BetMachine.model.BetRequestModel;
