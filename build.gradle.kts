@@ -1,5 +1,8 @@
+
+
 plugins {
 	java
+	application
 	id("org.springframework.boot") version "2.7.16-SNAPSHOT"
 	id("io.spring.dependency-management") version "1.0.15.RELEASE"
 }
@@ -9,6 +12,7 @@ version = "0.0.1-SNAPSHOT"
 
 java {
 	sourceCompatibility = JavaVersion.VERSION_17
+
 }
 
 configurations {
@@ -29,10 +33,19 @@ dependencies {
 	implementation("org.hibernate.validator:hibernate-validator")
 	compileOnly("org.projectlombok:lombok")
 	annotationProcessor("org.projectlombok:lombok")
-	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	testImplementation("org.springframework.boot:spring-boot-starter-test") {
+		exclude(module = "junit-vintage-engine")
+		exclude(module = "junit")
+		exclude(module = "mockito-core")
+	}
+	// https://mvnrepository.com/artifact/org.powermock/powermock-mockito-release-full
+	testImplementation("org.powermock:powermock-mockito-release-full:1.5.4")
 
 }
-
 tasks.withType<Test> {
 	useJUnitPlatform()
+	jvmArgs = listOf(
+		"--add-opens", "java.base/java.util.concurrent=ALL-UNNAMED",
+		"--add-opens", "java.base/java.lang=ALL-UNNAMED"
+	)
 }
