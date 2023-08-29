@@ -41,11 +41,4 @@ dependencies {
 }
 tasks.withType<Test> {
 	useJUnitPlatform()
-
-	jvmArgs = listOf(
-		"--add-opens", "java.base/java.util.concurrent=ALL-UNNAMED",
-		"--add-opens", "java.base/java.lang=ALL-UNNAMED",
-		"--add-opens", "java.base/java.security=ALL-UNNAMED",
-		"-Xmx2g"
-	)
 }

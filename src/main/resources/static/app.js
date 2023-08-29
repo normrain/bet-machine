@@ -1,12 +1,12 @@
 const stompClient = new StompJs.Client({
-    brokerURL: 'ws://localhost:8080/gs-guide-websocket'
+    brokerURL: 'ws://localhost:8080/connect-to-game'
 });
 
 stompClient.onConnect = (frame) => {
     setConnected(true);
     console.log('Connected: ' + frame);
-    stompClient.subscribe('/topic/messages', (result) => {
-        showGreeting(JSON.parse(result.body).win);
+    stompClient.subscribe('/topic/bets', (result) => {
+        showResults(JSON.parse(result.body).win);
     });
 };
 
@@ -28,7 +28,7 @@ function setConnected(connected) {
     else {
         $("#conversation").hide();
     }
-    $("#greetings").html("");
+    $("#results").html("");
 }
 
 function connect() {
@@ -41,14 +41,14 @@ function disconnect() {
     console.log("Disconnected");
 }
 
-function sendName() {
+function sendBet() {
     stompClient.publish({
-        destination: "/app/chat",
+        destination: "/app/game",
         body: JSON.stringify({'number': $("#number").val(), 'bet':$("#bet").val()})
     });
 }
 
-function showGreeting(message) {
+function showResults(message) {
     $("#results").append("<tr><td>" + message + "</td></tr>");
 }
 
