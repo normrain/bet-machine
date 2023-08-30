@@ -1,5 +1,5 @@
 const stompClient = new StompJs.Client({
-    brokerURL: 'ws://localhost:8080/connect-to-game'
+    brokerURL: 'ws://localhost:4000/connect-to-game'
 });
 
 stompClient.onConnect = (frame) => {

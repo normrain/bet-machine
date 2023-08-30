@@ -31,15 +31,17 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.springframework.boot:spring-boot-starter-websocket")
 	implementation("org.hibernate.validator:hibernate-validator")
+	// https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-ui
+	implementation("org.springdoc:springdoc-openapi-ui:1.7.0")
+
 	testImplementation("junit:junit:4.13.1")
 	testImplementation("org.projectlombok:lombok:1.18.28")
-	testImplementation("org.projectlombok:lombok:1.18.28")
+	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	compileOnly("org.projectlombok:lombok")
 	annotationProcessor("org.projectlombok:lombok")
-	testImplementation("org.springframework.boot:spring-boot-starter-test")
-
 
 }
+
 tasks.withType<Test> {
 	useJUnitPlatform()
 }
