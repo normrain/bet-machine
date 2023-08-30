@@ -33,6 +33,7 @@ dependencies {
 	implementation("org.hibernate.validator:hibernate-validator")
 	testImplementation("junit:junit:4.13.1")
 	testImplementation("org.projectlombok:lombok:1.18.28")
+	testImplementation("org.projectlombok:lombok:1.18.28")
 	compileOnly("org.projectlombok:lombok")
 	annotationProcessor("org.projectlombok:lombok")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
