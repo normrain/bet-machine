@@ -33,7 +33,7 @@ public class OptionalTaskTest {
         BigDecimal rtpFraction = ((GameRunnable.totalWin.divide(totalBet, 2, RoundingMode.HALF_UP)));
         BigDecimal rtpPercent = rtpFraction.multiply(new BigDecimal("100"));
 
-        System.out.println(String.format("After %d runs: Total money bet: %.2f, total money won: %.2f. RPT: %.2f %%",
+        System.out.println(String.format("After %d runs: Total money bet: %.2f, total money won: %.2f. RTP: %.2f %%",
                 testData.size(),
                 totalBet,
                 GameRunnable.totalWin,
